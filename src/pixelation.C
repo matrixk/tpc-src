@@ -24,8 +24,6 @@
 #include <TH3I.h>
 #include <TStopwatch.h>
 #include <TRandom3.h>
-#include <TUnuran.h>
-#include <TUnuranMultiContDist.h>
 #include <TMath.h>
 
 extern "C" {
@@ -110,7 +108,7 @@ int IoniImage(const param_t *pm, TTree *t1, const char *ofname, ssize_t iStart=0
 
 	//count zbin
 	zbin = (pm->time_max - pm->time_min) * 1e03 / pm->time_binwidth;
-	std::cout << "zbin = "<< zbin << std::endl;
+	//std::cout << "zbin = "<< zbin << std::endl;
 
 	ArrvingTime_neg = new TH2D("ArrvingTime_neg","Arrving Time(Negative ion, 20cm);Pixel number;Time(s)", pm->np, 0, pm->np, zbin, pm->time_min, pm->time_max);
 	ArrvingTime_pos = new TH2D("ArrvingTime_pos","Arrving Time(Positive ion, 20cm);Pixel number;Time(s)", pm->np, 0, pm->np, zbin, pm->time_min, pm->time_max);
@@ -178,7 +176,7 @@ int IoniImage(const param_t *pm, TTree *t1, const char *ofname, ssize_t iStart=0
 
 	for(i=0; i<iStop; i++) {
 		t1->GetEntry(i);
-		std::cout << "Get entry "<< i << std::endl;
+		//std::cout << "Get entry "<< i << std::endl;
 		ArrvingTime_pos->Reset();
 		ArrvingTime_neg->Reset();
 		std::cout << "Start to process event "<< i << std::endl;
