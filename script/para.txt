@@ -1,0 +1,5 @@
+-inputFile data_file.txt
+-outputFile data_out.txt
+-threshold 88 
+-noiseOnPixel 13
+-amplification 90

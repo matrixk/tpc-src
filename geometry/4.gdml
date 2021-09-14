@@ -1,0 +1,17 @@
+   <solidref ref="gasV" />
+   <auxiliary auxtype="SensDet" auxvalue="Tracker"/>
+   <auxiliary auxtype="Color" auxvalue="Blue" />
+  </volume> 
+  <volume name="World" >
+   <materialref ref="Vacuum" />
+   <solidref ref="world" />
+   <physvol>
+    <volumeref ref="GasV" />
+    <positionref ref="gasp" />
+   </physvol>
+   </volume>
+  </structure>
+  <setup name="Default" version="1.0" >
+    <world ref="World" />
+  </setup>
+</gdml>

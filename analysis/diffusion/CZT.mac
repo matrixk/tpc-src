@@ -1,0 +1,9 @@
+/control/verbose 2
+/run/verbose 2
+/tracking/verbose 1
+/tracking/storeTrajectory 1
+/G4QSim/phys/setCuts 0.001 mm
+/gps/particle e-
+/gps/energy 10 keV
+/gps/position 0.0 0.0 0.0 mm
+/gps/direction 0.0 0.0 1.0

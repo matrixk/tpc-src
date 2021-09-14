@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///opt/geant4.9.6.p02/source/persistency/gdml/schema/gdml.xsd">
+ <define>
+  <position name="worldp" unit="mm" x="0" y="0" z="0" /> 
+  <position name="liquidp" unit="mm" x="-20" y="0" z="0" /> 
+  <position name="gasp" unit="mm" x="0" y="0" z="0.5" />
+  <position name="gasp_in" unit="mm" x="400" y="0" z="0" />
+  <matrix name="LXe_RINDEX" coldim="2" values="6.91*eV 1.63 6.98*eV 1.61 7.05*eV 1.58"/>
+ </define>
+ <materials>
+  <element Z="48" formula="Cd" name="Cadmium" >
+   <atom value="112.414" />
+  </element>
+  <element Z="30" formula="Zn" name="Zinc" >
+   <atom value="65.38" />
+  </element>
+  <element Z="52" formula="Te" name="Tellurium" >
+   <atom value="127.60" />
+  </element>
+  <element Z="7" formula="N" name="Nitrogen" >
+   <atom value="14.01" />
+  </element>
+  <material formula=" " name="CZT" >
+    <D unit="g/cm3" value="5.78" />
+    <fraction n="0.45" ref="Cadmium" />
+    <fraction n="0.05" ref="Zinc" />
+    <fraction n="0.50" ref="Tellurium" />
+  </material>
+  <element Z="8" formula="O" name="Oxygen" >
+   <atom value="16" />
+  </element>
+  <element Z="82" formula="Pb" name="Lead" >
+   <atom value="207.19" />
+  </element>
+  <element Z="18" formula="Ar" name="Argon">
+   <atom unit="g/mole" value="39.948"/>
+  </element>
+  <element Z="16" formula="S" name="Sulfur" >
+   <atom value="32.066" />
+  </element>
+  <material formula=" " name="Air" >
+   <D value="0.00129" />
+   <fraction n="0.7" ref="Nitrogen" />
+   <fraction n="0.3" ref="Oxygen" />
+  </material>
+  <material name="PbS" >
+   <D value="7.60" />
+   <composite n="1" ref="Lead" />
+   <composite n="1" ref="Sulfur" />
+  </material>
+  <material Z="18" formula=" " name="ArgonGas" >
+   <D unit="g/cm3" value="0.14" />
+   <fraction n="1.0"  ref="Argon" />
+  </material>
+  <material Z="18" formula=" " name="ArgonLiquid" >
+  <property name="RINDEX" ref="LXe_RINDEX"/>
+   <D unit="g/cm3" value="1.4" />
+   <fraction n="1.0"  ref="Argon" />
+  </material>
+ </materials>
+ <solids>
+  <box aunit="radian" lunit="mm" name="world" x="10000" y="10000" z="10000" />
+  <box aunit="radian" lunit="mm" name="liquidV" x="40" y="40" z="40" />
+  <box aunit="radian" lunit="mm" name="gasV" x="4000" y="4000" z="1" />
+ </solids>
+ <structure>
+  <volume name="GasV" >
+   <materialref ref="CZT" />
+   <solidref ref="gasV" />
+   <auxiliary auxtype="SensDet" auxvalue="Tracker"/>
+   <auxiliary auxtype="Color" auxvalue="Blue" />
+  </volume> 
+  <volume name="World" >
+   <materialref ref="Air" />
+   <solidref ref="world" />
+   <physvol>
+    <volumeref ref="GasV" />
+    <positionref ref="gasp" />
+   </physvol>
+   </volume>
+  </structure>
+  <setup name="Default" version="1.0" >
+    <world ref="World" />
+  </setup>
+</gdml>
